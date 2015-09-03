@@ -1,0 +1,8 @@
+Inserted The Wind in the Willows into the catalog.
+Inserted Doors of Perception into the catalog.
+Inserted Calvin and Hobbes: Weirdos From Another Planet into the catalog.
+Doors of Perception is in the catalog.
+Neuromancer is not in the catalog.
+Inserted Neuromancer into the catalog.
+The Wind in the Willows was removed from the catalog.
+The Man Who Mistook His Wife for a Hat is not in the catalog.

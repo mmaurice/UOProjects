@@ -1,0 +1,17 @@
+8
+insert
+The Wind in the Willows
+insert
+Doors of Perception
+insert
+Calvin and Hobbes: Weirdos From Another Planet
+find
+Doors of Perception
+find
+Neuromancer
+insert
+Neuromancer
+remove
+The Wind in the Willows
+remove
+The Man Who Mistook His Wife for a Hat

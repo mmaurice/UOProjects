@@ -1,0 +1,86 @@
+(*
+5.4 a)
+*)
+datatype 'a tree = LEAF of 'a 
+            | NODE of 'a tree * 'a tree;
+
+fun maptree f = fn LEAF a => LEAF (f a)
+                 | NODE(b,c) => NODE (maptree f b, maptree f c);
+
+
+fun f(x) = x+1;
+maptree f(NODE(NODE(LEAF 1,LEAF 2),LEAF 3)); 
+
+(*
+The maptree function is of the multple-clause form, becasue we have mutiple types (LEAF and NODE). When we see a LEAF we want to run <parameter> (f, in this case) on our a value. When we see something of the form NODE(b,c) we want to make a recusive call on b and c. NODE's run until we only have Leaves and can update the a values. 
+*)
+(*
+b) The type ML gives to my function is, ('a -> 'b) -> 'a tree -> 'b tree. In this case 'a is not a constant value or type, rather it is closer to a variable that the interpreter automatically updates during runtime to avoid computational errors.  
+*)
+
+(*
+5.5
+*)
+fun reduce(f,LEAF(x)) = x
+					   | reduce(f, NODE(x,y))=f(reduce(f, x), reduce(f, y));
+
+
+fun f(x:int,y:int) = x + y;
+reduce f(NODE(NODE(LEAF 1,LEAF 2),LEAF 3)); 
+
+
+(*
+The reduce funtion will recursivley loop through until it reaches a LEAF. Once it sees a leaf it will then take the associated x value and pass it to the input function.  
+*)
+
+
+(*
+5.6
+a)
+
+*)
+fun f x y = x+y;
+fun g(x,y) = x+y;
+
+(*
+b)
+*)
+fun curry f = fn x => fn y => f(x,y);
+fun unCurry g = fn(x,y) => g x y;
+
+(*
+When currying, only one argument can be evaluated at a time. That is why there is no parenthesis associated with x and y. If the function is uncurried, it is able to use both arguments at the same time.
+*)
+
+(*
+a) If the if-statment evalueates to true then x.i will initialize successfully. However if it evaluates to false, then it will give a type error. The run-time system will not catch the problem, because it will succeed or fail, if x.i has a value.
+
+
+b) The same bug will not occure, because x will be an int and succeed or a string and catch a mismatch type error.  
+*)
+
+(*
+5.
+a) 
+*)
+
+datatype Seq = Nil | Cons of int * (unit -> Seq)
+
+fun head (Cons (x, _)) = x;
+
+fun tail (Cons (_, xs)) = xs ();
+
+fun mkOnes() = Cons(1, mkOnes);
+
+(*
+b)
+*)
+
+fun intList = k = Cons(k, fn() => intList(k+1));
+
+(*
+c)
+*)
+
+fun takeN 0 List = nil | takeN n List = head(List)::takeN(n-1)(tail(List));
+val x = takeN 4 (intList(10));
