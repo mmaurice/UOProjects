@@ -33,11 +33,17 @@ int main(int argc, char *argv[])
      
     // zero out the structure
     memset((char *) &si_me, 0, sizeof(si_me));
-    portno = atoi(argv[1]); 
+    portno = atoi(argv[2]); 
  
     si_me.sin_family = AF_INET;
     si_me.sin_port = htons(portno);
-    si_me.sin_addr.s_addr = htonl(INADDR_ANY);
+
+    const char * lochost = 'localhost';
+
+    if(argv[1] == lochost) {
+        argv[1] = "127.0.0.1";
+    }
+    si_me.sin_addr.s_addr = inet_addr(argv[1]);
      
     //bind socket to port
     if( bind(s , (struct sockaddr*)&si_me, sizeof(si_me) ) == -1)
